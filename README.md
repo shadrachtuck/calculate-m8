@@ -4,6 +4,8 @@ A mobile calculator app built with React, Capacitor, and Supabase.
 
 Check it out here: https://shadrachtuck.github.io/calculate-m8/
 
+Soon to be in available in ios and android app stores!
+
 ## Features
 
 - Basic calculator operations (addition, subtraction, multiplication, division)

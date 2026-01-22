@@ -107,6 +107,29 @@ npx cap update
 
 4. Build and run on your device or emulator using Android Studio or Xcode.
 
+## Deployment
+
+This project is configured for deployment on Vercel.
+
+### Deploying to Vercel
+
+1. Install the Vercel CLI (optional):
+```bash
+npm i -g vercel
+```
+
+2. Deploy using one of these methods:
+   - **Via Vercel Dashboard**: Connect your GitHub repository to Vercel at [vercel.com](https://vercel.com). Vercel will automatically detect the Vite configuration and deploy.
+   - **Via CLI**: Run `vercel` in the project root and follow the prompts.
+
+3. Configure environment variables in Vercel:
+   - Go to your project settings in Vercel
+   - Add the following environment variables:
+     - `VITE_SUPABASE_URL`
+     - `VITE_SUPABASE_ANON_KEY`
+
+Vercel will automatically build and deploy your app on every push to your main branch.
+
 ## License
 
 MIT # calculate-m8

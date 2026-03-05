@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabase';
-import Calculator from './components/Calculator';
-import Header from './components/Header';
-import SignIn from './components/SignIn';
+import Calculator from './components/Calculator.tsx';
+import Header from './components/Header.tsx';
+import SignIn from './components/SignIn.tsx';
 import type { User } from '@supabase/supabase-js';
 
 function App() {

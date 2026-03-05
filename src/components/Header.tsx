@@ -17,15 +17,17 @@ export default function Header({ user, onSignInClick, onSignOut }: HeaderProps) 
   };
 
   return (
-    <div className="w-full flex items-center justify-between px-4 py-4 relative">
-      <div className="flex-1 flex justify-center">
+    <div className="w-full flex items-center px-4 py-4">
+      {/* Left spacer: same flex weight as right so badge stays centered */}
+      <div className="flex-1 min-w-0" aria-hidden="true" />
+      <div className="flex-shrink-0">
         <img 
           src="/svg/badge.svg" 
           alt="calculate-m8" 
           className="h-12 w-auto"
         />
       </div>
-      <div className="absolute right-4 md:relative md:right-0">
+      <div className="flex-1 flex justify-end min-w-0">
         {user ? (
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-[#23272b] border border-gray-600">

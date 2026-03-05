@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 
 interface Computation {
-  id: string | number;
+  id: string;
   computation: string;
   result: number;
   created_at: string;
@@ -42,7 +42,7 @@ const HistoryPanel: React.FC<HistoryPanelProps> = ({
   onLoadSession,
   onDeleteSession,
   onClearSession,
-  user
+  user: _user
 }) => {
   const [activeTab, setActiveTab] = useState<'computations' | 'sessions'>('computations');
   const [showSaveModal, setShowSaveModal] = useState(false);

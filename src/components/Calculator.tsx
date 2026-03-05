@@ -163,25 +163,6 @@ export default function Calculator({ user }: CalculatorProps) {
     }
   };
 
-  const saveCurrentSessionToLocal = (computations: Computation[]) => {
-    try {
-      // Save all computations to master list
-      localStorage.setItem(STORAGE_KEY_ALL_COMPUTATIONS, JSON.stringify(computations));
-      
-      if (currentSessionId) {
-        const session: Session = {
-          id: currentSessionId,
-          name: sessions.find(s => s.id === currentSessionId)?.name || 'Untitled',
-          created_at: new Date().toISOString(),
-          computations
-        };
-        localStorage.setItem(STORAGE_KEY_CURRENT_SESSION, JSON.stringify(session));
-      }
-    } catch (error) {
-      console.error('Error saving current session:', error);
-    }
-  };
-
   const inputNumber = (num: number) => {
     if (waitingForOperand) {
       setDisplay(String(num));
@@ -305,11 +286,9 @@ export default function Calculator({ user }: CalculatorProps) {
     // Find the last saved computation (oldest one with session_id)
     // Since computations are sorted newest first, find the last index with session_id
     let lastSavedIndex = -1;
-    let lastSavedTimestamp: string | null = null;
     for (let i = computations.length - 1; i >= 0; i--) {
       if (computations[i].session_id) {
         lastSavedIndex = i;
-        lastSavedTimestamp = computations[i].created_at;
         break;
       }
     }
@@ -369,14 +348,12 @@ export default function Calculator({ user }: CalculatorProps) {
     } else {
       // Save to local storage
       let sessionId: string;
-      let sessionName: string;
       
       if (existingSessionId) {
         // Add to existing session
         const existingSession = sessions.find(s => s.id === existingSessionId);
         if (!existingSession) throw new Error('Session not found');
         sessionId = existingSessionId;
-        sessionName = existingSession.name;
         
         // Update existing session with new computations
         const updatedSession: Session = {
@@ -387,7 +364,6 @@ export default function Calculator({ user }: CalculatorProps) {
       } else {
         // Create new session
         sessionId = crypto.randomUUID();
-        sessionName = name;
         const newSession: Session = {
           id: sessionId,
           name,
@@ -503,7 +479,7 @@ export default function Calculator({ user }: CalculatorProps) {
         onHistoryClick={() => setIsHistoryOpen(true)}
       />
       <div
-        className="w-[240px] h-10 rounded-[2px] bg-[#23272b] flex items-center justify-center"
+        className="w-[280px] h-10 rounded-[2px] bg-[#23272b] flex items-center justify-center"
         style={{
           boxShadow: 'rgba(0, 0, 0, 0.7) 0px 2px 3px inset, rgba(255, 255, 239, 0.78) 0px 4px 4px -1.5px, rgb(0, 0, 0) 0px 2px 2px 0px inset',
           borderTop: '1px solid rgb(0, 0, 0)',
